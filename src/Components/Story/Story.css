@@ -1,0 +1,62 @@
+.Story {
+  border: 1px solid #999;
+  margin: 15px;
+  width: 90%;
+  border: 1px solid rgba(0, 0, 0, .1);
+  box-shadow: 5px 5px 5px rgba(0, 0, 0, .2);
+  border-radius: 15px;
+  display: flex;
+  flex-flow: column;
+  align-items: flex-start;
+  justify-content: center;
+  padding-left: 25px;
+}
+
+.TitleDiv {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 0;
+  height: 25px;
+  width: 100%;
+}
+
+.Tags {
+  margin: 0 15px;
+  padding: 0 25px;
+  display: flex;
+  align-items: center;
+  justify-content: space-evenly;
+}
+
+.ProgressTag {
+  padding: 3px 10px;
+  background: coral;
+  border-radius: 15px;
+  margin: 5px;
+  color: white;
+  cursor: pointer;
+}
+
+.Description {
+  display: flex;
+  flex-flow: row;
+  align-items: flex-start;
+  justify-content: space-between;
+  width: 100%;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  margin: 5px 0;
+  transition: all ease-in .2s;
+}
+
+.Description i {
+  padding-top: 20px;
+  margin-right: 25px;
+  cursor: pointer;
+}
+
+.Description p {
+  width: 50%;
+  margin: 5px 0;
+}

@@ -1,0 +1,27 @@
+.Nav {
+  margin: 0;
+  font-weight: normal;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.Nav h1 {
+  margin: 0;
+  padding: 25px 50px;
+  cursor: pointer;
+
+}
+
+.NavList {
+  display: flex;
+  align-items: center;
+  justify-content: space-evenly;
+}
+
+.NavItem {
+  list-style: none;
+  padding: 0 50px;
+  cursor: pointer;
+
+}

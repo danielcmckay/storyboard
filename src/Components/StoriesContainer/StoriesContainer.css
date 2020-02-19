@@ -1,0 +1,16 @@
+.StoriesContainer {
+  background-color: white;
+  color: #222;
+  width: 55%;
+  margin-left: 50px;
+  height: 85%;
+  border: 1px solid rgba(0, 0, 0, .2);
+  border-radius: 15px;
+  box-shadow: 5px 5px 5px rgba(0, 0, 0, .2);
+  display: flex;
+  flex-flow: column;
+  justify-content: flex-start;
+  align-items: center;
+  box-sizing: border-box;
+  overflow: scroll;
+}
