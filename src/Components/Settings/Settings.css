@@ -1,0 +1,40 @@
+.Settings {
+  width: 100%;
+  height: 90vh;
+  padding: 0;
+  margin: 0;
+  padding-top: 200px;
+  text-align: left;
+}
+
+.Settings-dark {
+  background: #222;
+  color: white;
+  transition: all ease-in .5s;
+}
+
+.Settings span {
+  font-size: 1.2rem;
+  width: 100%;
+  margin-bottom: 50px;
+  display: flex;
+  justify-content: space-between;
+}
+
+.Toggle {
+  height: 20px;
+}
+
+.SettingsWrapper {
+  display: flex;
+  flex-flow: column;
+  align-items: flex-start;
+  width: 20%;
+  margin: auto;
+}
+
+.SettingsWrapper .Button {
+  width: 40%;
+  margin: auto;
+  text-align: center;
+}

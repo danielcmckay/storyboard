@@ -1,0 +1,8 @@
+.ErrorModal {
+ 
+  z-index: 1000;
+  color: orangered;
+  margin: auto;
+  margin-top: 25px;
+  transition: all ease-in-out .2s;
+}

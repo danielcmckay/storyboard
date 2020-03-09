@@ -3,14 +3,21 @@
   color: #222;
   width: 30%;
   margin-left: 50px;
+
   height: 85%;
   border-radius: 15px;
-  border: 1px solid rgba(0, 0, 0, .2);
-  box-shadow: 5px 5px 5px rgba(0, 0, 0, 0.2);
+  border: 1px solid rgba(0, 0, 0, .1);
+  box-shadow: 5px 5px 5px rgba(0, 0, 0, 0.1);
   display: flex;
   flex-flow: column;
   align-items: center;
   justify-content: flex-start;
+}
+
+.NewStoryContainer-dark {
+  color: white;
+  background: #333;
+  transition: all ease-in .5s;
 }
 
 .NewStoryContainer form {
@@ -22,12 +29,22 @@
 }
 
 .NewStoryInput {
-  width: 100%;
+  width: 90%;
   border: none;
-  border-bottom: 1px solid #999;
+  border-bottom: 1px solid rgba(0, 0, 0, .1);
   color: #999;
   margin-bottom: 15px;
-  margin: 25px 0;
+  margin: 25px auto;
+  padding: 10px;
+  padding-bottom: 7px;
+  border-radius: 0;
+}
+
+.NewStoryInput-dark {
+  border-color: #999;
+  color: #999;
+  background: #222;
+  transition: all ease-in 2s;
 }
 
 .NewStoryInput:focus {
@@ -35,6 +52,10 @@
   outline: none;
   color: #222;
   border-bottom: 1px solid #222;
+}
+
+.NewStoryInput-dark:focus {
+  color: white;
 }
 
 .NewStoryInput:last-child {
@@ -45,12 +66,24 @@
   background: #FF5555;
   color: white;
   padding: 15px 20px;
-  border-radius: 15px;
+  border-radius: 10px;
   cursor: pointer;
 
+}
+
+.Button-dark {
+  background: slateblue;
+  transition: all ease-in 2s;
 }
 
 .Button:hover {
   background: rgb(216, 36, 36);
   transition: all ease-in-out .2s;
 }
+/* 
+@media screen and (max-width: 850px) {
+  .NewStoryContainer {
+    width: 100%;
+    margin: 0;
+  }
+} */

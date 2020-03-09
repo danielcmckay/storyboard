@@ -1,15 +1,30 @@
 .StoryBoard {
   padding: 0;
   margin: 0;
-  height: 100vh;
+  height: 90vh;
   width: 100vw;
   color: #222;
   background: linear-gradient(#fff);
+}
+
+.StoryBoard-dark {
+  color: white;
+  background: #222;
+  transition: all ease-in .5s;
 }
 
 .ContentWrapper {
   display: flex;
   justify-items: center;
   align-items: center;
-  height:90%;
+  height: 100%;
+  width: 85%;
+  margin: auto;
+  padding: 0 50px;
 }
+
+/* @media screen and (max-width: 850px) {
+  .ContentWrapper {
+    flex-flow: column;
+  }
+} */

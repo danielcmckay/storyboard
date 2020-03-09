@@ -1,8 +1,9 @@
 .Button {
   background: #FF5555;
   color: white;
+  border: none;
   padding: 15px 20px;
-  border-radius: 55px;
+  border-radius: 15px;
   cursor: pointer;
 
 }
@@ -10,4 +11,11 @@
 .Button:hover {
   background: rgb(216, 36, 36);
   transition: all ease-in-out .2s;
+}
+
+.LoginBtnAlt {
+  color: #ff5555;
+  margin-top: 25px;
+  background-color: #fff;
+  border: 1px solid #ff5555;
 }

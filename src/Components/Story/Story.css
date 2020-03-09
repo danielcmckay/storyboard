@@ -10,6 +10,11 @@
   align-items: flex-start;
   justify-content: center;
   padding-left: 25px;
+  padding-top: 15px;
+}
+
+.Story-dark {
+  background: #222;
 }
 
 .TitleDiv {
@@ -30,10 +35,11 @@
 }
 
 .ProgressTag {
-  padding: 3px 10px;
+  padding: 5px 10px;
+  font-size: .75rem;
   background: coral;
   border-radius: 15px;
-  margin: 5px;
+  margin: 15px 25px;
   color: white;
   cursor: pointer;
 }
@@ -43,20 +49,30 @@
   flex-flow: row;
   align-items: flex-start;
   justify-content: space-between;
-  width: 100%;
+  width: 98%;
   text-overflow: ellipsis;
   overflow: hidden;
   margin: 5px 0;
   transition: all ease-in .2s;
+  font-size: .95rem;
 }
 
 .Description i {
-  padding-top: 20px;
-  margin-right: 25px;
+  padding-top: 0px;
+  margin-right: 15px;
   cursor: pointer;
 }
 
 .Description p {
   width: 50%;
   margin: 5px 0;
+}
+
+.buttons {
+  width: 100px;
+  display: flex;
+  align-items: flex-start;
+  justify-content: flex-end;
+  margin-top: 0;
+
 }

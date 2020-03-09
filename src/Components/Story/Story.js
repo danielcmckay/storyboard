@@ -1,8 +1,12 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
+import themeContext from '../../context/themeContext'
 import "./Story.css";
+import Spinner from '../Reusable/Spinner';
 
 const Story = props => {
   const [isExpanded, expand] = useState(false);
+  const {dark} = useContext(themeContext);
+
 
   const expandStory = e => {
     expand(!isExpanded);
@@ -12,11 +16,16 @@ const Story = props => {
     props.deleteStory(props.id);
   };
 
+  const updateProgressHandler = e => {
+    props.cycleProgress(props.id);
+  }
+
   return (
-    <div className="Story">
+    <div className={!dark ? 'Story' : 'Story Story-dark'}>
+      {props.isLoading && <Spinner />}
       <div className="TitleDiv">
         <h2>{props.title}</h2>
-        <div className="ProgressTag">{props.progressTag}</div>
+        <div className="ProgressTag" onClick={updateProgressHandler}>{props.progressTag}</div>
       </div>
       <div
         className="Description"
@@ -24,7 +33,7 @@ const Story = props => {
       >
         <div>{`${props.description} `}</div>{" "}
         <div className="buttons">
-          <i className="fas fa-edit"></i>
+          <i className="fas fa-edit" onClick={() => props.editStory(props.id)}></i>
           <i className="fas fa-trash-alt" onClick={deleteClickHandler}></i>
           <i
             className={

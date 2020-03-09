@@ -24,15 +24,16 @@
 }
 
 .title-decoration:first-child {
-  background: #FF5555;
+  background: #ff5555;
 }
 
 .title-decoration:last-child {
-  background: #88D9F7;
+  background: #88d9f7;
 }
 
 .title-decoration-wrapper {
   margin-bottom: 55px;
+  margin-left: 5px;
   display: flex;
   align-items: center;
   justify-content: space-evenly;
@@ -59,8 +60,14 @@
   width: 200px;
   margin: 20px;
   border: none;
-  border-bottom: 1px solid #777;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.1);
   background: #fff;
   outline: none;
-  
+}
+
+.LoginBtnAlt {
+  color: #ff5555;
+  margin-top: 25px;
+  background-color: #fff;
+  border: 1px solid #ff5555;
 }
