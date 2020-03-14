@@ -4,6 +4,7 @@ import NewStoryContainer from "../NewStoryContainer/NewStoryContainer";
 import "./StoryBoard.css";
 import themeContext from "../../context/themeContext";
 import { AuthContext } from "../../context/AuthContext";
+import Spinner from "../Reusable/Spinner";
 
 const StoryBoard = () => {
   const [stories, setState] = useState([]);
@@ -14,10 +15,12 @@ const StoryBoard = () => {
 
   useEffect(() => {
     getStories();
+    console.log('Use effect triggered')
   }, [auth.userId]);
 
   const getStories = async () => {
     try {
+      setIsLoading(true);
       const response = await fetch(
         `http://localhost:5000/api/stories/user/${auth.userId}`,
         {
@@ -36,10 +39,12 @@ const StoryBoard = () => {
     } catch (err) {
       console.log(err);
     }
+    setIsLoading(false);
   };
 
   const addStory = async newStory => {
     try {
+      setIsLoading(true);
       const response = await fetch("http://localhost:5000/api/stories/", {
         method: "POST",
         headers: {
@@ -49,7 +54,8 @@ const StoryBoard = () => {
           title: newStory.title,
           description: newStory.description,
           tags: newStory.tags,
-          creator: auth.userId
+          creator: auth.userId,
+          progress: newStory.progress
         })
       });
 
@@ -57,6 +63,7 @@ const StoryBoard = () => {
     } catch (err) {
       console.log(err);
     }
+    setIsLoading(false);
     getStories();
   };
 
@@ -74,20 +81,44 @@ const StoryBoard = () => {
     setState(updatedStories);
   };
 
-  const editStory = async (id) => {
+  const editStory = async id => {
     let toEdit;
     try {
       const response = await fetch(`http://localhost:5000/api/stories/${id}`, {
         method: "GET"
       });
       toEdit = await response.json();
-      setStoryToEdit(toEdit);
-
+      setStoryToEdit(toEdit.story);
     } catch (error) {
       console.log(error);
     }
-  }
+  };
 
+  // create patch function and pass down to newstorycontainer
+  const submitEditStory = async editedStory => {
+    console.log(editedStory);
+    try {
+      const response = await fetch(
+        `http://localhost:5000/api/stories/${editedStory.id}`,
+        {
+          method: "PATCH",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({
+            title: editedStory.title,
+            description: editedStory.description,
+            creator: editedStory.creator
+          })
+        }
+        
+      );
+      console.log(response.body)
+      const responseData = await response.json();
+      getStories();
+      console.log(responseData)
+    } catch (error) {
+      console.log(error);
+    }
+  };
 
   return (
     <div className={!dark ? "StoryBoard" : "StoryBoard StoryBoard-dark"}>
@@ -100,7 +131,13 @@ const StoryBoard = () => {
           isLoading={isLoading}
         />
 
-        <NewStoryContainer addStory={addStory} storyToEdit={storyToEdit}/>
+        <NewStoryContainer
+          addStory={addStory}
+          storyToEdit={storyToEdit}
+          submitEditStory={submitEditStory}
+        >
+          {isLoading && <Spinner />}
+        </NewStoryContainer>
       </div>
     </div>
   );

@@ -14,11 +14,16 @@ const Settings = () => {
     window.localStorage.setItem('darkTheme', !dark);
   }
 
+  const changeStoryOrderHandler = () => {
+
+  }
+
   return (
     <div className={!dark ? 'Settings' : 'Settings Settings-dark'}>
       <div className="SettingsWrapper">
       <span>Set dark/light theme: <Toggle className="Toggle" onChange={changeThemeHandler} checked={dark} /></span>
-      <Button>Reset to defaults</Button>
+      {/* <span>Story order: Newest first <Toggle className="Toggle" onChange={changeStoryOrderHandler} checked={dark} /></span> */}
+      <Button>Reset</Button>
       </div>
     </div>
   )

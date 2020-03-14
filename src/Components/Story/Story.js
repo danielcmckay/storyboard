@@ -1,7 +1,6 @@
 import React, { useState, useContext } from "react";
 import themeContext from '../../context/themeContext'
 import "./Story.css";
-import Spinner from '../Reusable/Spinner';
 
 const Story = props => {
   const [isExpanded, expand] = useState(false);
@@ -22,10 +21,9 @@ const Story = props => {
 
   return (
     <div className={!dark ? 'Story' : 'Story Story-dark'}>
-      {props.isLoading && <Spinner />}
       <div className="TitleDiv">
         <h2>{props.title}</h2>
-        <div className="ProgressTag" onClick={updateProgressHandler}>{props.progressTag}</div>
+        {/* <div className="ProgressTag" onClick={updateProgressHandler}>{props.progressTag}</div> */}
       </div>
       <div
         className="Description"

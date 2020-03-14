@@ -1,34 +1,48 @@
-import React, { useState, useContext } from "react";
+import React, { useState, useContext, useEffect } from "react";
 import themeContext from '../../context/themeContext'
-import "./NewStoryContainer.css";;
+import "./NewStoryContainer.css";
+import Spinner from '../Reusable/Spinner';
+
 
 const NewStoryContainer = props => {
-  const story = { title: "", description: "", id: "", tags: [] };
-  const [newStory, setState] = useState(story);
-  const [inEdit, setInEdit] = useState();
+  const [newStory, setStory] = useState({ title: "", description: "", id: "", progress: "In Progress" });
+  const [inEdit, setEdit] = useState(false);
 
   const handleChange = e => {
-    setState({ ...newStory, [e.target.name]: e.target.value });
+    setStory({ ...newStory, [e.target.name]: e.target.value });
   };
 
   const clearInputs = () => {
-    setState({title: "", description: "", id: "", tags: [] });
+    setStory({title: "", description: "", id: "", progress: "In Progress" });
 
   }
 
-  // useContext(() => {
-  //   if (!props.storyToEdit === undefined) {
-  //     setInEdit(true);
-  //     setState(props.storyToEdit)
-  //   }
-  // }, [props.storyToEdit])
 
   const Submit = e => {
     e.preventDefault();
     props.addStory(newStory);
-    setState({title: "", description: "", id: "", tags: [] });
+    setStory({title: "", description: "", id: "", progress: "In Progress" });
   };
 
+
+  const editHandler = () => {
+    console.log(props.storyToEdit);
+    if (props.storyToEdit !== undefined) {
+      setStory(props.storyToEdit);
+    }
+  }
+
+  const submitEditHandler = (e) => {
+    e.preventDefault();
+    console.log(newStory);
+    props.submitEditStory(newStory);
+  }
+
+  useEffect(() => {
+    props.storyToEdit !== undefined && setEdit(true);
+    editHandler();
+   
+  }, [props.storyToEdit])
   
 
   const {dark} = useContext(themeContext);
@@ -37,31 +51,26 @@ const NewStoryContainer = props => {
   return (
     <div className={!dark ? "NewStoryContainer" : "NewStoryContainer NewStoryContainer-dark"}>
       {props.storyToEdit === undefined ? <h2>Create a new story</h2> : <h2>Update story</h2>}
-      <form onSubmit={Submit}>
+      <form onSubmit={!inEdit ? Submit : submitEditHandler}>
         <input
           onChange={handleChange}
           className={!dark ? "NewStoryInput" : "NewStoryInput NewStoryInput-dark"}
           type="text"
           name="title"
-          // defaultValue={!props.isEditing ? story.title : props.storyToEdit[0].title}
+          value={newStory.title}
           placeholder="New story title"
         />
         <input
           onChange={handleChange}
           className={!dark ? "NewStoryInput" : "NewStoryInput NewStoryInput-dark"}
           type="text"
-          name="tags"
-          placeholder="New story tags"
-        />
-        <input
-          onChange={handleChange}
-          className={!dark ? "NewStoryInput" : "NewStoryInput NewStoryInput-dark"}
-          type="text"
+          value={newStory.description}
+
           name="description"
           placeholder="Description"
         />
         <button type="submit" className="Button">
-          Add Story +
+          {!inEdit ? "Add Story +" : "Update Story"}
         </button>
       </form>
     </div>

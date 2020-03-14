@@ -13,6 +13,11 @@
   transition: all ease-in-out .2s;
 }
 
+.Button:focus {
+  outline: none;
+  border:none;
+}
+
 .LoginBtnAlt {
   color: #ff5555;
   margin-top: 25px;

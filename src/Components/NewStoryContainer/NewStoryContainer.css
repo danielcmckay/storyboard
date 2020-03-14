@@ -80,6 +80,11 @@
   background: rgb(216, 36, 36);
   transition: all ease-in-out .2s;
 }
+
+.Button:focus {
+  outline: none;
+  border:none;
+}
 /* 
 @media screen and (max-width: 850px) {
   .NewStoryContainer {
