@@ -16,7 +16,7 @@ import {
 
 const App = () => {
   const [dark, setDark] = useState();
-  const [isLoggedIn, setIsLoggedIn] = useState(true);
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [userId, setUserId] = useState('5e6017d4a9835a614b38b026');
 
   useEffect(() => {

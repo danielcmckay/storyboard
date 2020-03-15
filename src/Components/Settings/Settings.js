@@ -18,12 +18,17 @@ const Settings = () => {
 
   }
 
+  const resetHandler = () => {
+    setDark(false);
+    window.localStorage.setItem('darkTheme', false);
+  }
+
   return (
     <div className={!dark ? 'Settings' : 'Settings Settings-dark'}>
       <div className="SettingsWrapper">
       <span>Set dark/light theme: <Toggle className="Toggle" onChange={changeThemeHandler} checked={dark} /></span>
       {/* <span>Story order: Newest first <Toggle className="Toggle" onChange={changeStoryOrderHandler} checked={dark} /></span> */}
-      <Button>Reset</Button>
+      <Button onClick={resetHandler}>Reset</Button>
       </div>
     </div>
   )
