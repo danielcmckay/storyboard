@@ -32,7 +32,7 @@ const Login = () => {
 
     if (loginMode) {
       try {
-        const response = await fetch("http://localhost:5000/api/users/login", {
+        const response = await fetch(process.env.REACT_APP_BACKEND_URL + '/api/users/login', {
           method: "POST",
           headers: {
             "Content-Type": "application/json"
@@ -50,13 +50,13 @@ const Login = () => {
           throw new Error(responseData.message)
         }
         setLoading(false);
-        auth.login(responseData.user.id);
+        auth.login(responseData.userId, responseData.token);
       } catch (err) {
         setError(err.message || "Something went wrong!");
       }
     } else {
       try {
-        const response = await fetch("http://localhost:5000/api/users/signup", {
+        const response = await fetch(process.env.REACT_APP_BACKEND_URL + '/api/users/signup', {
           method: "POST",
           headers: {
             "Content-Type": "application/json"
@@ -68,16 +68,16 @@ const Login = () => {
         });
 
         const responseData = await response.json();
-        console.log(responseData.user.id)
         if (!response.ok) {
           setLoading(false);
 
           throw new Error(responseData.message)
         }
         setLoading(false);
-        auth.login(responseData.user.id);
+        auth.login(responseData.userId, responseData.token);
       } catch (err) {
         setError(err.message || "Something went wrong!");
+        console.log(err)
       }
     }
   };

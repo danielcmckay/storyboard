@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useCallback } from "react";
+import React, { useState, useEffect} from "react";
 import "./App.css";
 import StoryBoard from "./Components/StoryBoard/StoryBoard";
 import Login from "./Components/Auth/Login";
@@ -6,6 +6,8 @@ import Nav from "./Components/Nav/Nav";
 import Settings from "./Components/Settings/Settings";
 import themeContext from "./context/themeContext";
 import { AuthContext } from "./context/AuthContext";
+import useAuth from './hooks/auth-hook';
+
 
 import {
   BrowserRouter as Router,
@@ -14,43 +16,33 @@ import {
   Redirect
 } from "react-router-dom";
 
+
 const App = () => {
+  const {userId, token, login, logout} = useAuth();
   const [dark, setDark] = useState();
-  const [isLoggedIn, setIsLoggedIn] = useState(false);
-  const [userId, setUserId] = useState('5e6017d4a9835a614b38b026');
 
   useEffect(() => {
     if (!window.localStorage.getItem("darkTheme")) {
       window.localStorage.setItem("darkTheme", "false");
     } else {
-      window.localStorage.getItem("darkTheme") == "true" && setDark(true);
+      window.localStorage.getItem("darkTheme") === 'true' && setDark(true);
     }
-  }, []);
-
-  const login = useCallback(uid => {
-    setIsLoggedIn(true);
-    setUserId(uid);
-  }, []);
-
-  const logout = useCallback(() => {
-    setIsLoggedIn(false);
-    setUserId(null);
   }, []);
 
   let routes;
 
-  if (isLoggedIn) {
+  if (token) {
     routes = (
       <themeContext.Provider value={{ dark, setDark }}>
         <Nav />
-        <Route path='/' exact>
+        <Route path="/" exact>
           <StoryBoard />
         </Route>
         <Route path="/settings" exact>
           <Settings />
         </Route>
 
-        <Redirect to='/' />
+        <Redirect to="/" />
       </themeContext.Provider>
     );
   } else {
@@ -65,7 +57,8 @@ const App = () => {
     <div className="App">
       <AuthContext.Provider
         value={{
-          isLoggedIn: isLoggedIn,
+          isLoggedIn: !!token,
+          token: token,
           login: login,
           logout: logout,
           userId: userId

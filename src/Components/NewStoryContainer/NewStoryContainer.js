@@ -1,32 +1,25 @@
 import React, { useState, useContext, useEffect } from "react";
 import themeContext from '../../context/themeContext'
 import "./NewStoryContainer.css";
-import Spinner from '../Reusable/Spinner';
 
 
 const NewStoryContainer = props => {
-  const [newStory, setStory] = useState({ title: "", description: "", id: "", progress: "In Progress" });
+  const [newStory, setStory] = useState({ title: "", description: "", id: "", progress: true });
   const [inEdit, setEdit] = useState(false);
 
   const handleChange = e => {
     setStory({ ...newStory, [e.target.name]: e.target.value });
   };
 
-  const clearInputs = () => {
-    setStory({title: "", description: "", id: "", progress: "In Progress" });
-
-  }
-
 
   const Submit = e => {
     e.preventDefault();
     props.addStory(newStory);
-    setStory({title: "", description: "", id: "", progress: "In Progress" });
+    setStory({title: "", description: "", id: "", progress: true});
   };
 
 
   const editHandler = () => {
-    console.log(props.storyToEdit);
     if (props.storyToEdit !== undefined) {
       setStory(props.storyToEdit);
     }
@@ -34,8 +27,9 @@ const NewStoryContainer = props => {
 
   const submitEditHandler = (e) => {
     e.preventDefault();
-    console.log(newStory);
     props.submitEditStory(newStory);
+    setStory({title: "", description: "", id: "", progress: true});
+
   }
 
   useEffect(() => {

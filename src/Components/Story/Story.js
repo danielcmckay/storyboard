@@ -15,15 +15,15 @@ const Story = props => {
     props.deleteStory(props.id);
   };
 
-  const updateProgressHandler = e => {
-    props.cycleProgress(props.id);
-  }
+  // const updateProgressHandler = e => {
+  //   props.updateProgress(props.id);
+  // }
 
   return (
     <div className={!dark ? 'Story' : 'Story Story-dark'}>
       <div className="TitleDiv">
         <h2>{props.title}</h2>
-        {/* <div className="ProgressTag" onClick={updateProgressHandler}>{props.progressTag}</div> */}
+        {/* <div className="ProgressTag" onClick={updateProgressHandler}>{props.progress === true ? 'In Progress' : 'Completed'}</div> */}
       </div>
       <div
         className="Description"

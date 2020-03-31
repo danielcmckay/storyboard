@@ -76,3 +76,9 @@
   margin-top: 0;
 
 }
+
+@media screen and (max-width: 450px) {
+  .Story {
+    margin: 15px 0;
+  }
+}

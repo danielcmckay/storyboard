@@ -22,9 +22,9 @@ const StoriesContainer = props => {
           description={story.description}
           key={story.id}
           deleteStory={props.deleteStory}
-          progress={props.progress}
+          progress={story.progress}
           editStory={props.editStory}
-          cycleProgress={props.cycleProgress}
+          updateProgress={props.updateProgress}
           isLoading={props.isLoading}
 
         />

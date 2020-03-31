@@ -85,10 +85,10 @@
   outline: none;
   border:none;
 }
-/* 
-@media screen and (max-width: 850px) {
+@media screen and (max-width: 900px) {
   .NewStoryContainer {
     width: 100%;
-    margin: 0;
+    margin-left: 0;
+    margin-bottom: 25px;
   }
-} */
+}

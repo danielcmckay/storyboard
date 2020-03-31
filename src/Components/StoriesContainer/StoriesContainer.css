@@ -20,8 +20,8 @@
   transition: all ease-in .5s;
 }
 
-/* @media screen and (max-width: 850px) {
+@media screen and (max-width: 900px) {
   .StoriesContainer {
     width: 100%;
   }
-} */
+}

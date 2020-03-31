@@ -71,3 +71,28 @@
   background-color: #fff;
   border: 1px solid #ff5555;
 }
+
+@media screen and (max-width: 700px) {
+  .Login {
+    height: 80vh;
+    padding: 0;
+    margin: 0;
+    padding-top: 50px;
+
+  }
+  .Login h1 {
+    font-size: 1.75rem;
+  }
+
+  .Login p {
+    font-size: .75rem;
+  }
+  .Login form label {
+    font-size: .75rem;
+  }
+  .Login form input {
+    width: 55%;
+    margin: 10px;
+    margin-bottom: 15px;
+  }
+}

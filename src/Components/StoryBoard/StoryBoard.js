@@ -13,25 +13,24 @@ const StoryBoard = () => {
   const [storyToEdit, setStoryToEdit] = useState();
   const [isLoading, setIsLoading] = useState(false);
 
-  useEffect(() => {
-    getStories();
-    console.log('Use effect triggered')
-  }, [auth.userId]);
 
   const getStories = async () => {
     try {
       setIsLoading(true);
       const response = await fetch(
-        `http://localhost:5000/api/stories/user/${auth.userId}`,
+        `${process.env.REACT_APP_BACKEND_URL}/api/stories/user/${auth.userId}`,
         {
-          method: "GET"
+          method: "GET",
+          headers: {
+            "Authorization": 'Bearer ' + auth.token
+          }
         }
       );
 
       const responseData = await response.json();
 
       if (responseData.userStories !== undefined) {
-        setState(responseData.userStories);
+        setState(responseData.userStories.reverse());
       }
       if (!response.ok) {
         throw new Error(responseData.message);
@@ -45,10 +44,11 @@ const StoryBoard = () => {
   const addStory = async newStory => {
     try {
       setIsLoading(true);
-      const response = await fetch("http://localhost:5000/api/stories/", {
+      const response = await fetch(process.env.REACT_APP_BACKEND_URL + '/api/stories/', {
         method: "POST",
         headers: {
-          "Content-Type": "application/json"
+          "Content-Type": "application/json",
+          "Authorization": 'Bearer ' + auth.token
         },
         body: JSON.stringify({
           title: newStory.title,
@@ -59,7 +59,7 @@ const StoryBoard = () => {
         })
       });
 
-      const responseData = await response.json();
+      await response.json();
     } catch (err) {
       console.log(err);
     }
@@ -70,8 +70,11 @@ const StoryBoard = () => {
   const deleteStory = async id => {
     const updatedStories = stories.filter(story => story.id !== id);
     try {
-      await fetch(`http://localhost:5000/api/stories/${id}`, {
-        method: "DELETE"
+      await fetch(process.env.REACT_APP_BACKEND_URL + `/api/stories/${id}`, {
+        method: "DELETE",
+        headers: {
+          "Authorization": 'Bearer ' + auth.token
+        }
       });
       setIsLoading(true);
     } catch (error) {
@@ -84,8 +87,11 @@ const StoryBoard = () => {
   const editStory = async id => {
     let toEdit;
     try {
-      const response = await fetch(`http://localhost:5000/api/stories/${id}`, {
-        method: "GET"
+      const response = await fetch(process.env.REACT_APP_BACKEND_URL + `/api/stories/${id}`, {
+        method: "GET",
+        headers: {
+          "Authorization": 'Bearer ' + auth.token
+        }
       });
       toEdit = await response.json();
       setStoryToEdit(toEdit.story);
@@ -94,15 +100,13 @@ const StoryBoard = () => {
     }
   };
 
-  // create patch function and pass down to newstorycontainer
   const submitEditStory = async editedStory => {
-    console.log(editedStory);
     try {
       const response = await fetch(
-        `http://localhost:5000/api/stories/${editedStory.id}`,
+        process.env.REACT_APP_BACKEND_URL + `/api/stories/${editedStory.id}`,
         {
           method: "PATCH",
-          headers: { "Content-Type": "application/json" },
+          headers: { "Content-Type": "application/json", "Authorization": 'Bearer ' + auth.token },
           body: JSON.stringify({
             title: editedStory.title,
             description: editedStory.description,
@@ -111,14 +115,40 @@ const StoryBoard = () => {
         }
         
       );
-      console.log(response.body)
-      const responseData = await response.json();
+      await response.json();
       getStories();
-      console.log(responseData)
     } catch (error) {
       console.log(error);
     }
   };
+
+  const updateProgressHandler = async (storyId) => {
+    console.log(storyId);
+    try {
+      const response = await fetch(
+        process.env.REACT_APP_BACKEND_URL + `/api/stories/${storyId}`,
+        {
+          method: "PATCH",
+          headers: { "Content-Type": "application/json", "Authorization": 'Bearer ' + auth.token },
+          body: JSON.stringify({
+            progress: false
+          })
+        }
+        
+      );
+      await response.json();
+      getStories();
+    } catch (error) {
+      console.log(error);
+    }
+  }
+
+  useEffect(() => {
+    if(auth.userId !== null) {
+      getStories();
+    }
+    
+  }, [auth.userId]);
 
   return (
     <div className={!dark ? "StoryBoard" : "StoryBoard StoryBoard-dark"}>
@@ -129,6 +159,7 @@ const StoryBoard = () => {
           id="StoryContainer"
           editStory={editStory}
           isLoading={isLoading}
+          updateProgress={updateProgressHandler}
         />
 
         <NewStoryContainer
