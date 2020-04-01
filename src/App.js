@@ -7,14 +7,14 @@ import Settings from "./Components/Settings/Settings";
 import themeContext from "./context/themeContext";
 import { AuthContext } from "./context/AuthContext";
 import useAuth from './hooks/auth-hook';
-
-
 import {
   BrowserRouter as Router,
   Route,
   Switch,
   Redirect
 } from "react-router-dom";
+
+
 
 
 const App = () => {
